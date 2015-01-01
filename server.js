@@ -14,3 +14,7 @@ app = express();
 app.use(express.static(__dirname));
 app.listen(port);
 console.log("Server Running on " + port);
+
+var MyModule = require('./my_module.js');
+my_module = new MyModule()
+my_module.work()

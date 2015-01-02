@@ -16,5 +16,12 @@ app.set('view engine', 'jade')
 app.listen(port)
 console.log("Listen on " + port)
 
-app.get('/', CaseRoute.showAll)
+app.use("/static", express.static(__dirname + '/static'))
+app.use("/bower", express.static(__dirname + '/bower_components'))
+
+app.get('/', function(req, res) {
+	res.render('index', {
+		title: '给豆豆'
+	})
+})
 app.get('/new/:content', CaseRoute.addCase)

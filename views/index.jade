@@ -1,9 +1,19 @@
 doctype html
 html(lang="en")
 	head
-		meta(charset="utf-8")
+		meta(charset = "utf-8")
 		title #{title}
+		script(src = "/bower/jquery/dist/jquery.min.js")
+		script(src = "/bower/TimelineJS/build/js/storyjs-embed.js")
+		script.
+			$(document).ready(function() {
+				createStoryJS({
+					type:       'timeline',
+					width:      '98%',
+					height:     '98%',
+					source:     '/static/timeline.json',
+					embed_id:   'my-timeline'
+				});
+			});
 	body
-		ul
-			each _case in cases
-				li= _case.content
+		div#my-timeline(style = "position:absolute;")

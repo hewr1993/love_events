@@ -4,3 +4,6 @@ html(lang="en")
 		meta(charset="utf-8")
 		title #{title}
 	body
+		ul
+			each _case in cases
+				li= _case.content

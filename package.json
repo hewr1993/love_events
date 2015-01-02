@@ -1,0 +1,25 @@
+{
+  "name": "todoudou",
+  "version": "0.0.1",
+  "description": "豆豆与蛋蛋的爱情点滴",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.10.6",
+	"jade": "^1.8.2",
+	"mongoose": "^3.8.21"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "author": "Wayne Ho",
+  "contributors": [
+  ],
+  "license": "MIT"
+}

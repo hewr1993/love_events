@@ -1,0 +1,9 @@
+{
+  "name": "todoudou",
+  "version": "0.0.1",
+  "dependencies": {
+    "foundation": "~5.5.0",
+    "TimelineJS": "~2.35.2"
+  },
+  "private": true
+}

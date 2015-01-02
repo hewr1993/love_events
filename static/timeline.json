@@ -1,0 +1,43 @@
+{
+    "timeline":
+    {
+        "headline":"大时代的小日子",
+        "type":"default",
+        "text":"蛋蛋和豆豆爱情生活的点点滴滴",
+        "asset": {
+            "media":"/static/imgs/ourlove.jpg",
+            "credit":"",
+            "caption":""
+        },
+        "date": [
+            {
+                "startDate":"2013,8,21",
+                "endDate":"2013,8,22",
+                "headline":"初次见面",
+                "text":"豆豆的S3坏了，于是大贴膜系的蛋蛋瞬间化身修手机达人粗线啦！<br>好巧呢，蛋蛋也用的S3^_^",
+                "tag":"情侣手机",
+                "classname":"",
+                "asset": {
+                    "media":"/static/imgs/S3-lover.jpg",
+                    "thumbnail":"/static/imgs/S3.jpg",
+                    "credit":"<a href='#'>组图</a>",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2013,8,22",
+                "endDate":"2013,8,23",
+                "headline":"初次见面",
+                "text":"豆豆的S3坏了，于是大贴膜系的蛋蛋瞬间化身修手机达人粗线啦！<br>好巧呢，蛋蛋也用的S3^_^",
+                "tag":"情侣手机",
+                "classname":"",
+                "asset": {
+                    "media":"/static/imgs/S3-lover.jpg",
+                    "thumbnail":"/static/imgs/S3.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            }
+        ]
+    }
+}

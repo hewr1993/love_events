@@ -81,11 +81,11 @@ app.post('/admin/modify/:id', function(req, res) {
 	var headline = req.body.headline || ""
 	var text = req.body.text || ""
 	var tag = req.body.tag || ""
-	var startDate = req.body.startDate
-	var endDate = req.body.endDate ? req.body.endDate : startDate
+	var startDate = moment(req.body.startDate).format("MM/DD/YYYY")
+	var endDate = moment(req.body.endDate ? req.body.endDate : startDate).format("MM/DD/YYYY")
 	var media_filename = req.files.media ? req.files.media.name : ""
 	var thumbnail_filename = req.files.thumbnail ? req.files.thumbnail.name : ""
-	if (_id.length == 0 || headline.length == 0 || moment(startDate) > moment(endDate)) {
+	if (_id.length == 0 || headline.length == 0 || startDate > endDate) {
 		res.send({success: "no", content: _id + " " + headline})
 		return
 	}

@@ -1,0 +1,47 @@
+doctype html
+html(lang="en" ng-app="tddApp")
+	head
+		meta(charset = "utf-8")
+		title 后台管理
+		link(rel = "icon", href = "/static/imgs/iloveu.png")
+		link(rel = "stylesheet" href = "/bower/foundation/css/foundation.css")
+		script(src = "/bower/jquery/dist/jquery.min.js")
+		script(src = "/bower/jquery-form/jquery.form.js")
+		script(src = "/bower/angular/angular.min.js")
+		script(src = "/bower/angular-foundation/mm-foundation-tpls.min.js")
+		script(src = "/static/js/admin.js")
+	body
+		form#upload-form(class = "custom" data-abide = "ajax" enctype = "multipart/form-data" ng-controller="formCtrl")
+			fieldset
+				div
+					select#case-selector(ng-model = "selected" ng-change = "updateForm(selected)" ng-options = "_case._id as _case.headline for _case in cases")
+				div
+					label 标题 
+						small 必填
+						input(type = "text" name = "headline" placeholder="好好写标题哦我的小豆豆" ng-value = "info.headline" required)
+					small(class = "error") 必须要有标题哦
+				div
+					label 描述 
+						textarea(name = "text" placeholder="可以详细说说发生了啥呀") {{info.text}}
+				div
+					label 标签 
+						input(type = "text" name = "tag" placeholder="几个字的小概括" ng-value = "info.tag")
+				div
+					label 封面图
+						input(type = "file" name = "media" accept="image/gif, image/jpeg, image/png, image/bmp")
+				button#upload-button(type="submit" style = "width:100%") 提交
+		div(class = "progress success round")
+			span#upload-progress-bar(class = "meter" style = "width:0%")
+		script(src = "/bower/foundation/js/foundation.min.js")
+		script(src = "/bower/foundation/js/foundation/foundation.abide.js")
+		script.
+			$(document).foundation({
+				abide : {
+					live_validate : true,
+					focus_on_invalid : true,
+					error_labels: true,
+					timeout : 1000,
+					patterns : {
+					}
+				}
+			});

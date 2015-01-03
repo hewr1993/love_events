@@ -3,6 +3,7 @@ html(lang="en")
 	head
 		meta(charset = "utf-8")
 		title #{title}
+		link(rel = "icon", href = "/static/imgs/iloveu.png")
 		script(src = "/bower/jquery/dist/jquery.min.js")
 		script(src = "/bower/TimelineJS/build/js/storyjs-embed.js")
 		script.
@@ -11,7 +12,7 @@ html(lang="en")
 					type:       'timeline',
 					width:      '98%',
 					height:     '98%',
-					source:     '/static/timeline.json',
+					source:     '/cases', //'/static/timeline.json',
 					embed_id:   'my-timeline'
 				});
 			});

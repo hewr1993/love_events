@@ -1,11 +1,19 @@
 var mongodb = require('./mongodb');
 var Schema = mongodb.mongoose.Schema;
 var CaseSchema = new Schema({
-	content: String,
-	date : { type: Date, default: Date.now},
+	headline: String,
+	text: String,
+	tag: String,
+	media: String
 });
 var Case = mongodb.mongoose.model("Case", CaseSchema);
 var CaseDAO = function(){};
+
+CaseDAO.prototype.update = function(_id, obj, callback) {
+	Case.update({_id: _id}, obj, function(err) {
+		callback(err);
+	});
+}
 
 CaseDAO.prototype.save = function(obj, callback) {
 	var instance = new Case(obj);

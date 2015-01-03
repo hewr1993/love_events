@@ -1,4 +1,4 @@
-angular.module('tddApp', ['mm.foundation']);
+angular.module('tddApp', ['mm.foundation', 'ngInputDate']);
 
 var formCtrl = function($scope, $http) {
 	$http.get('/cases/info').success(function(data, status) {
@@ -11,7 +11,9 @@ var formCtrl = function($scope, $http) {
 			headline: "",
 			text: "",
 			tag: "",
-			media: ""
+			media: "",
+			startDate: new Date(),
+			endDate: new Date()
 		};
 		if ($scope.cases != undefined) 
 			for (var i = 1; i < $scope.cases.length; ++i) 
@@ -33,12 +35,17 @@ var formCtrl = function($scope, $http) {
 			uploadProgress: function(event, position, total, percentComplete) {
 				$("#upload-progress-bar").width(percentComplete + "%");
 			},
-			success: function(data) {
-				//res = JSON.parse(data);
+			success: function(res) {
 				$("#upload-button").removeAttr("disabled");
+				if (res.success == "yes") {
+					window.location.reload();
+				} else {
+					alert(JSON.stringify(res));
+				}
 			},
 			error: function(e) {
 				$("#upload-button").removeAttr("disabled");
+				alert(e);
 			}
 		});
 	});

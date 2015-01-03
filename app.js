@@ -10,6 +10,7 @@ var express = require('express')
 var multer  = require('multer')
 var mongoose = require('mongoose')
 var CaseModel = require("./models/case")
+var moment = require('moment')
 var app = express()
 
 app.use(multer({
@@ -19,10 +20,10 @@ app.use(multer({
 		return filename + Date.now();
 	},
 	onFileUploadStart: function(file) {
-		console.log(file.originalname + ' is starting ...')
+		//console.log(file.originalname + ' is starting ...')
 	},
 	onFileUploadComplete: function(file) {
-		console.log(file.fieldname + ' uploaded to  ' + file.path)
+		//console.log(file.fieldname + ' uploaded to  ' + file.path)
 	}
 }));
 
@@ -49,16 +50,22 @@ app.post('/admin/new', function(req, res) {
 	var headline = req.body.headline || ""
 	var text = req.body.text || ""
 	var tag = req.body.tag || ""
+	var startDate = moment(req.body.startDate)
+	var endDate = req.body.endDate ? moment(req.body.endDate) : startDate
 	var media_filename = req.files.media ? req.files.media.name : ""
-	if (headline.length == 0 || media_filename.length == 0) {
-		res.send({success: "no", content:headline + " " + media_filename})
+	var thumbnail_filename = req.files.thumbnail ? req.files.thumbnail.name : ""
+	if (headline.length == 0 || startDate > endDate) {
+		res.send({success: "no", content:headline + " " + startDate + " " + endDate})
 		return
 	}
 	obj = {
 		headline: headline,
 		text: text,
 		tag: tag,
-		media: media_filename
+		startDate: startDate,
+		endDate: endDate,
+		media: media_filename,
+		thumbnail: thumbnail_filename
 	}
 	CaseModel.save(obj, function(err) {
 		if (err) {
@@ -74,17 +81,23 @@ app.post('/admin/modify/:id', function(req, res) {
 	var headline = req.body.headline || ""
 	var text = req.body.text || ""
 	var tag = req.body.tag || ""
+	var startDate = req.body.startDate
+	var endDate = req.body.endDate ? req.body.endDate : startDate
 	var media_filename = req.files.media ? req.files.media.name : ""
-	if (_id.length == 0 || headline.length == 0) {
+	var thumbnail_filename = req.files.thumbnail ? req.files.thumbnail.name : ""
+	if (_id.length == 0 || headline.length == 0 || moment(startDate) > moment(endDate)) {
 		res.send({success: "no", content: _id + " " + headline})
 		return
 	}
 	obj = {
 		headline: headline,
 		text: text,
-		tag: tag
+		tag: tag,
+		startDate: startDate,
+		endDate: endDate
 	}
 	if (media_filename.length > 0) obj.media = media_filename
+	if (thumbnail_filename.length > 0) obj.thumbnail = thumbnail_filename
 	CaseModel.update(_id, obj, function(err) {
 		if (err) {
 			res.send({success: "no", content: err})
@@ -114,20 +127,25 @@ app.get('/cases', function(req, res) {
 			};
 			for (var i in cases) {
 				var _case = cases[i]
-				resultJSON.timeline.date.push({
-					startDate: "2013,9,20",
-					endDate: "2013,9,20",
+				var startDate = moment(_case.startDate).format("YYYY,MM,DD")
+				var endDate = moment(_case.endDate).format("YYYY,MM,DD")
+				var obj = {
+					startDate: startDate,
+					endDate: endDate,
 					headline: _case.headline,
 					text: _case.text,
 					tag: _case.tag,
 					classname: "",
 					asset: {
-						media: "/static/uploads/" + _case.media,
-						thumbnail:"",
+						media: _case.media,
+						thumbnail: _case.thumbnail == "" ? _case.media : _case.thumbnail,
 						credit: "",
 						caption: ""
 					}
-				})
+				}
+				obj.asset.media = obj.asset.media == "" ? "/static/imgs/iloveu.png" : "/static/uploads/" + obj.asset.media
+				obj.asset.thumbnail = obj.asset.thumbnail == "" ? "/static/imgs/iloveu.png" : "/static/uploads/" + obj.asset.thumbnail
+				resultJSON.timeline.date.push(obj)
 			}
 			res.send(resultJSON)
 		}

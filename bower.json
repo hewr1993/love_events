@@ -6,7 +6,9 @@
     "angular-foundation": "",
     "TimelineJS": "~2.35.2",
     "angular": "~1.2.x",
-	"jquery-form": ""
+	"jquery-form": "",
+	"moment": "",
+	"angular-input-date": ""
   },
   "private": true
 }

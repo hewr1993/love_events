@@ -9,6 +9,7 @@ html(lang="en" ng-app="tddApp")
 		script(src = "/bower/jquery-form/jquery.form.js")
 		script(src = "/bower/angular/angular.min.js")
 		script(src = "/bower/angular-foundation/mm-foundation-tpls.min.js")
+		script(src = "/bower/angular-input-date/src/angular-input-date.js")
 		script(src = "/static/js/admin.js")
 	body
 		form#upload-form(class = "custom" data-abide = "ajax" enctype = "multipart/form-data" ng-controller="formCtrl")
@@ -17,21 +18,32 @@ html(lang="en" ng-app="tddApp")
 					select#case-selector(ng-model = "selected" ng-change = "updateForm(selected)" ng-options = "_case._id as _case.headline for _case in cases")
 				div
 					label 标题 
-						small 必填
-						input(type = "text" name = "headline" placeholder="好好写标题哦我的小豆豆" ng-value = "info.headline" required)
+						small(style = "color:red") 必填
+						input(type = "text" name = "headline" placeholder="好好写标题哦我的小豆豆" ng-model = "info.headline" required)
 					small(class = "error") 必须要有标题哦
 				div
 					label 描述 
 						textarea(name = "text" placeholder="可以详细说说发生了啥呀") {{info.text}}
 				div
 					label 标签 
-						input(type = "text" name = "tag" placeholder="几个字的小概括" ng-value = "info.tag")
+						input(type = "text" name = "tag" placeholder="几个字的小概括" ng-model = "info.tag")
+				div
+					label 开始日期 
+						small(style = "color:red") 必填
+						input(type = "date" name = "startDate" ng-model = "info.startDate")
+					small(class = "error") 开始日期一定要有哦
+				div
+					label 结束日期
+						input(type = "date" name = "endDate" ng-model = "info.endDate")
 				div
 					label 封面图
 						input(type = "file" name = "media" accept="image/gif, image/jpeg, image/png, image/bmp")
+				div
+					label 缩略图
+						input(type = "file" name = "thumbnail" accept="image/gif, image/jpeg, image/png, image/bmp")
 				button#upload-button(type="submit" style = "width:100%") 提交
-		div(class = "progress success round")
-			span#upload-progress-bar(class = "meter" style = "width:0%")
+				div(class = "progress success round")
+					span#upload-progress-bar(class = "meter" style = "width:0%")
 		script(src = "/bower/foundation/js/foundation.min.js")
 		script(src = "/bower/foundation/js/foundation/foundation.abide.js")
 		script.

@@ -4,7 +4,10 @@ var CaseSchema = new Schema({
 	headline: String,
 	text: String,
 	tag: String,
-	media: String
+	startDate: String,
+	endDate: String,
+	media: String,
+	thumbnail: String
 });
 var Case = mongodb.mongoose.model("Case", CaseSchema);
 var CaseDAO = function(){};

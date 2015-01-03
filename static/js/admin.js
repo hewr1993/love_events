@@ -19,6 +19,8 @@ var formCtrl = function($scope, $http) {
 			for (var i = 1; i < $scope.cases.length; ++i) 
 				if ($scope.cases[i]._id == item) {
 					$scope.info = $scope.cases[i];
+					$scope.info.startDate = new Date($scope.info.startDate);
+					$scope.info.endDate = new Date($scope.info.endDate);
 					break;
 				}
 	};

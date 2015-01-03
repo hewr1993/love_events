@@ -47,7 +47,7 @@ var formCtrl = function($scope, $http) {
 			},
 			error: function(e) {
 				$("#upload-button").removeAttr("disabled");
-				alert(e);
+				alert(JSON.stringify(e));
 			}
 		});
 	});

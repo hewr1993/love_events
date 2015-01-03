@@ -54,7 +54,7 @@ app.post('/admin/new', function(req, res) {
 	var endDate = moment(req.body.endDate ? req.body.endDate : startDate).format("MM/DD/YYYY")
 	var media_filename = req.files.media ? req.files.media.name : ""
 	var thumbnail_filename = req.files.thumbnail ? req.files.thumbnail.name : ""
-	if (headline.length == 0 || startDate > endDate) {
+	if (headline.length == 0 || moment(startDate).format("YYYY/MM/DD") > moment(endDate).format("YYYY/MM/DD")) {
 		res.send({success: "no", content:headline + " " + startDate + " " + endDate})
 		return
 	}
@@ -85,7 +85,7 @@ app.post('/admin/modify/:id', function(req, res) {
 	var endDate = moment(req.body.endDate ? req.body.endDate : startDate).format("MM/DD/YYYY")
 	var media_filename = req.files.media ? req.files.media.name : ""
 	var thumbnail_filename = req.files.thumbnail ? req.files.thumbnail.name : ""
-	if (_id.length == 0 || headline.length == 0 || startDate > endDate) {
+	if (_id.length == 0 || headline.length == 0 || moment(startDate).format("YYYY/MM/DD") > moment(endDate).format("YYYY/MM/DD")) {
 		res.send({success: "no", content: _id + " " + headline})
 		return
 	}
